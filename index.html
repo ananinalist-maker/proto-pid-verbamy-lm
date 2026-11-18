@@ -112,7 +112,7 @@ h2 .dim{color:var(--ink-2)}
 .hero-media{position:absolute;inset:0;will-change:transform}
 .hero-media .kb{position:absolute;inset:0;animation:kb 26s var(--ease) infinite alternate}
 .hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover}
-@keyframes kb{from{transform:scale(1.02) rotate(0)}to{transform:scale(1.14) rotate(.6deg)}}
+@keyframes kb{from{transform:scale(1.02) rotate(0)}to{transform:scale(1.08) rotate(.3deg)}}
 .hero-frame::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(20,24,18,.62),rgba(20,24,18,.12) 58%),linear-gradient(0deg,rgba(15,18,13,.55),transparent 42%)}
 .hero-copy{position:absolute;z-index:2;left:clamp(18px,2.4vw,34px);top:clamp(64px,14%,140px);max-width:min(640px,90%)}
 .eyebrow{font-size:14px;opacity:.9;margin-bottom:18px;display:flex;align-items:center;gap:8px}
@@ -433,10 +433,7 @@ footer{padding:clamp(40px,5vw,60px) var(--pad) 18px}
 <section class="hero" id="top" aria-label="Садиба Під Вербами">
   <div class="hero-frame" id="heroFrame">
     <div class="hero-media" id="heroMedia"><div class="kb">
-      <picture>
-        <source media="(max-width:760px)" srcset="media/hero-m.jpg">
-        <img src="media/hero.jpg" alt="Ставок садиби під вербами, альтанка на воді і дерев'яний місток" fetchpriority="high">
-      </picture>
+      <video id="heroVid" autoplay muted loop playsinline preload="auto" poster="media/hero.jpg" aria-label="Ставок садиби під вербами, альтанка на воді і дерев'яний місток"></video>
     </div></div>
     <div class="hero-copy" id="heroCopy">
       <p class="eyebrow rv" data-d="100">Садиба у Вижниці, Буковина</p>
@@ -653,6 +650,8 @@ footer{padding:clamp(40px,5vw,60px) var(--pad) 18px}
 
 <script>
 (()=>{
+const hv=document.getElementById('heroVid');const isM=matchMedia('(max-width:760px)').matches;hv.poster=isM?'media/hero-m.jpg':'media/hero.jpg';
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){hv.src=isM?'media/hero-m.mp4':'media/hero.mp4';hv.play&&hv.play().catch(()=>{})}
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const VIBER='+380978878039';
